@@ -19,13 +19,5 @@ const newGallery = galleryItems.map(({ preview, original, description}) =>
 gallery.insertAdjacentHTML('afterbegin', newGallery);
 
 
-const onGalleryClickOpen = (event) => {
-    event.preventDefault();
-    if (event.target.classList.contains("gallery__image")) {
-        const lightbox = new SimpleLightbox('.gallery a', { captionsData: 'alt', captionDelay: 250});
-        
-        
-    }
-                    
-}      
-    gallery.addEventListener('click', onGalleryClickOpen); 
+const lightbox = new SimpleLightbox('.gallery a', { captionsData: 'alt', captionDelay: 250});
+
