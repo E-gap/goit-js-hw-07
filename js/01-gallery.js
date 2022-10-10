@@ -34,13 +34,12 @@ const onGalleryClickOpen = (event) => {
 
         instance.show();
 
-        gallery.addEventListener('keydown', onGalleryClickClose);
+        gallery.addEventListener('keydown', onGalleryClickClose, {once: true});
         function onGalleryClickClose(event) {
             if (event.code === "Escape") {        
                 
                 instance.close();
-                gallery.removeEventListener("keydown", onGalleryClickClose);
-    
+                    
             }
         }
     }
