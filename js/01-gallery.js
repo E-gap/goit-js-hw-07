@@ -6,7 +6,7 @@ console.log(galleryItems);
 
 const gallery = document.querySelector('.gallery');
 
-console.log(gallery);
+
 
 const newGallery = galleryItems.map(({ preview, original, description}) => 
     `<div class="gallery__item">
@@ -21,23 +21,31 @@ const newGallery = galleryItems.map(({ preview, original, description}) =>
 </div>`)
     .join("");
 
-console.log(newGallery);
+
 
 gallery.insertAdjacentHTML('afterbegin', newGallery);
 
-gallery.addEventListener('click', (event) => {
+const onGalleryClickOpen = (event) => {
     event.preventDefault();
     if (event.target.classList.contains("gallery__image")) {
-        event.target.setAttribute("src", "event.target.dataset.source")
+        
+        const instance = basicLightbox.create(`
+    <img src="${event.target.dataset.source}" width = "1280">`)
+
+        instance.show();
+
+        gallery.addEventListener('keydown', onGalleryClickClose);
+        function onGalleryClickClose(event) {
+            if (event.code === "Escape") {        
+                
+                instance.close();
+                gallery.removeEventListener("keydown", onGalleryClickClose);
+    
+            }
+        }
     }
+}
+
+    gallery.addEventListener('click', onGalleryClickOpen); 
 
     
-
-})
-
-const instance = basicLightbox.create(`
-    <img src="assets/images/image.png" width="800" height="600">
-`)
-
-instance.show()
-
